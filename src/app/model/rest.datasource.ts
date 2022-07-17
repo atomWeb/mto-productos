@@ -13,7 +13,7 @@ export class RestDataSource {
   ) {}
 
   getData(): Observable<Product[]> {
-    return this.sendRequest<Product[]>('GET', this.url).pipe(delay(5000));
+    return this.sendRequest<Product[]>("GET", this.url);//.pipe(delay(5000));
     // return this.http.jsonp<Product[]>(this.url, "callback");
   }
 

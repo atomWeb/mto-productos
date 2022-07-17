@@ -187,12 +187,16 @@ export class FormComponent {
     this.keywordGroup.removeAt(index);
   }
 
-  resetForm() {
-    this.keywordGroup.clear();
-    this.keywordGroup.push(this.createKeywordFormControl());
-    this.editing = true;
-    this.product = new Product();
-    this.productForm.reset();
+  // resetForm() {
+  //   this.keywordGroup.clear();
+  //   this.keywordGroup.push(this.createKeywordFormControl());
+  //   this.editing = true;
+  //   this.product = new Product();
+  //   this.productForm.reset();
+  // }
+
+  unsavedChanges(): boolean {
+    return this.productForm.dirty;
   }
 
   submitForm() {
@@ -202,7 +206,7 @@ export class FormComponent {
       // this.product = new Product();
       // this.keywordGroup.clear();
       // this.keywordGroup.push(this.createKeywordFormControl());
-      // this.productForm.reset();
+      this.productForm.reset();
       this.router.navigateByUrl('/');
     }
   }

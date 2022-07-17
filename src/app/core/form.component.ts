@@ -68,21 +68,32 @@ export class FormComponent {
   });
 
   constructor(
-    private model: Model,
+    public model: Model,
     activeRoute: ActivatedRoute,
     private router: Router
   ) {
-    // this.editing = activeRoute.snapshot.url[1].path == 'edit';
-    this.editing = activeRoute.snapshot.params['mode'] == 'edit';
-    let id = activeRoute.snapshot.params['id'];
-    if (id != null) {
-      // Object.assign(this.product, model.getProduct(id) || new Product());
-      // this.productForm.patchValue(this.product);
-      model.getProductObservable(id).subscribe((p) => {
-        Object.assign(this.product, p || new Product());
-        this.productForm.patchValue(this.product);
-      });
-    }
+    activeRoute.params.subscribe((params) => {
+      this.editing = params['mode'] == 'edit';
+      let id = params['id'];
+      if (id != null) {
+        model.getProductObservable(id).subscribe((p) => {
+          Object.assign(this.product, p || new Product());
+          this.productForm.patchValue(this.product);
+        });
+      }
+    });
+    // // this.editing = activeRoute.snapshot.url[1].path == 'edit';
+    // this.editing = activeRoute.snapshot.params['mode'] == 'edit';
+    // let id = activeRoute.snapshot.params['id'];
+    // if (id != null) {
+    //   // Object.assign(this.product, model.getProduct(id) || new Product());
+    //   // this.productForm.patchValue(this.product);
+    //   model.getProductObservable(id).subscribe((p) => {
+    //     Object.assign(this.product, p || new Product());
+    //     // this.productForm.patchValue(this.product);
+    //     this.productForm.patchValue(this.product);
+    //   });
+    // }
   }
   // constructor(
   //   private model: Model,

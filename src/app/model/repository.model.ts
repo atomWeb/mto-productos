@@ -43,6 +43,38 @@ export class Model {
     return subject;
   }
 
+  getNextProductId(id?: number): Observable<number> {
+    let subject = new ReplaySubject<number>(1);
+    this.replaySubject.subscribe((products) => {
+      let nextId = 0;
+      let index = products.findIndex((p) => this.locator(p, id));
+      if (index > -1) {
+        nextId = products[products.length > index + 1 ? index + 1 : 0].id ?? 0;
+      } else {
+        nextId = id || 0;
+      }
+      subject.next(nextId);
+      subject.complete();
+    });
+    return subject;
+  }
+  
+  getPreviousProductid(id?: number): Observable<number> {
+    let subject = new ReplaySubject<number>(1);
+    this.replaySubject.subscribe((products) => {
+      let nextId = 0;
+      let index = products.findIndex((p) => this.locator(p, id));
+      if (index > -1) {
+        nextId = products[index > 0 ? index - 1 : products.length - 1].id ?? 0;
+      } else {
+        nextId = id || 0;
+      }
+      subject.next(nextId);
+      subject.complete();
+    });
+    return subject;
+  }
+
   // saveProduct(product: Product) {
   //   if (product.id == 0 || product.id == null) {
   //     product.id = this.generateID();

@@ -17,7 +17,7 @@
             <td>{{item.price | currency:"USD" }}</td>
             <td>
                 <ng-container *ngIf="item.details else empty">
-                  {{ item.details?.supplier }}, {{ item.details?.keywords}}
+                    {{ item.details?.supplier }}, {{ item.details?.keywords}}
                 </ng-container>
                 <ng-template #empty>(None)</ng-template>
             </td>
@@ -25,14 +25,15 @@
                 <button class="btn btn-danger btn-sm m-1" (click)="deleteProduct(item.id)">
                     Delete
                 </button>
-                <button class="btn btn-warning btn-sm" (click)="editProduct(item.id)">
+                <button class="btn btn-warning btn-sm"
+                    [routerLink]="['/form', 'edit', item.id]">
                     Edit
                 </button>
             </td>
         </tr>
     </tbody>
 </table>
-<button class="btn btn-primary m-1" (click)="createProduct()">
+<button class="btn btn-primary m-1" routerLink="/form/create">
     Create New Product
 </button>
 <button class="btn btn-danger m-1" (click)="deleteProduct(-1)">

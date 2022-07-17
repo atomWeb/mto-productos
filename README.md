@@ -1,4 +1,4 @@
-# SportsStore
+# example APP Mto Productos
 
 Proyecto Angular ejemplo del libro [Pro Angular 5ed - Apress](https://github.com/Apress/pro-angular-5ed) 
 
